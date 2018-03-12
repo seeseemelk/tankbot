@@ -16,16 +16,21 @@ subprojects {
 	targetCompatibility = 9
 
 	repositories {
+		mavenCentral()
 		jcenter()
 	}
 
 	dependencies {
+		compile 'org.apache.logging.log4j:log4j-api:2.10.0'
+		compile 'org.apache.logging.log4j:log4j-core:2.10.0'
 		testCompile 'junit:junit:4.12'
 	}
 }
 
 project('tank-server') {
 	apply plugin: 'application'
+
+	mainClassName = 'be.seeseemelk.tankbot.server.ServerMain'
 
 	dependencies {
 		compile project(':tank-common')
@@ -34,6 +39,8 @@ project('tank-server') {
 
 project('tank-control') {
 	apply plugin: 'application'
+
+	mainClassName = 'be.seeseemelk.tankbot.control.ControlMain'
 
 	dependencies {
 		compile project(':tank-common')
