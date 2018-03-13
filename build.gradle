@@ -12,8 +12,8 @@ subprojects {
 	eclipse.classpath.downloadJavadoc = true
 	eclipse.classpath.downloadSources = true
 
-	sourceCompatibility = 9
-	targetCompatibility = 9
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
 
 	repositories {
 		mavenCentral()
