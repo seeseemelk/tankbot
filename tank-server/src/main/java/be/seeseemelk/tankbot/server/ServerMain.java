@@ -6,16 +6,25 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import be.seeseemelk.tankbot.common.packets.BasePacket;
-import be.seeseemelk.tankbot.common.packets.TrackSpeedPacket;
 
 public final class ServerMain
 {
 	private Logger logger;
 	private ServerConnection connection;
 	
+	/**
+	 * Gets a named logger.
+	 * @param name The name to give to the logger.
+	 * @return A newly created named logger.
+	 */
+	public static Logger getLogger(String name)
+	{
+		return LogManager.getLogger(name);
+	}
+
 	public ServerMain()
 	{
-		logger = LogManager.getLogger("Server");
+		logger = getLogger("Server");
 		logger.info("Starting server...");
 		connection = new ServerConnection(this);
 	}

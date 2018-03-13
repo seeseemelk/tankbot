@@ -3,7 +3,8 @@ package be.seeseemelk.tankbot.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Logger;
+
+import org.apache.logging.log4j.Logger;
 
 import be.seeseemelk.tankbot.common.Connection;
 import be.seeseemelk.tankbot.common.MultiplexedConnection;
@@ -21,7 +22,7 @@ public class ServerConnection
 
 	public ServerConnection(ServerMain server)
 	{
-		logger = Logger.getLogger("Socket");
+		logger = ServerMain.getLogger("Socket");
 		this.server = server;
 	}
 	
