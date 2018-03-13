@@ -13,6 +13,7 @@ import be.seeseemelk.tankbot.common.packets.PongPacket;
 
 public class ServerConnection
 {
+	public static final int PORT = 28000;
 	private Logger logger;
 	private ServerMain server;
 	private ServerSocket serverSocket;
@@ -20,7 +21,7 @@ public class ServerConnection
 
 	public ServerConnection(ServerMain server)
 	{
-		logger = Logger.getLogger("ServerSocket");
+		logger = Logger.getLogger("Socket");
 		this.server = server;
 	}
 	
@@ -30,9 +31,13 @@ public class ServerConnection
 	 */
 	public void start() throws IOException
 	{
-		serverSocket = new ServerSocket(28000);
+		logger.info("Starting socket on port " + PORT);
+		serverSocket = new ServerSocket(PORT);
+		logger.info("Waiting for connection");
 		Socket socket = serverSocket.accept();
+		logger.info("Connection established from " + socket.getRemoteSocketAddress());
 		connection = new MultiplexedConnection(socket.getInputStream(), socket.getOutputStream());
+		logger.info("Multiplexed connection established");
 	}
 	
 	/**
