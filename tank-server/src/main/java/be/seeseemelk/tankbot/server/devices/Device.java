@@ -2,7 +2,8 @@ package be.seeseemelk.tankbot.server.devices;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Describes any type of peripheral attached to the bot, such as a sensor or a
@@ -14,8 +15,8 @@ import java.util.HashSet;
 public abstract class Device
 {
 	private final String name;
-	private final HashSet<DeviceInput> inputs = new HashSet<>();
-	private final HashSet<DeviceOutput> outputs = new HashSet<>();
+	private final Map<String, DeviceInput> inputs = new HashMap<>();
+	private final Map<String, DeviceOutput> outputs = new HashMap<>();
 	
 	/**
 	 * Creates a new device with a given name.
@@ -33,7 +34,7 @@ public abstract class Device
 	 */
 	protected void addInput(DeviceInput input)
 	{
-		inputs.add(input);
+		inputs.put(input.getName(), input);
 	}
 	
 	/**
@@ -42,7 +43,7 @@ public abstract class Device
 	 */
 	protected void addOutput(DeviceOutput output)
 	{
-		outputs.add(output);
+		outputs.put(output.getName(), output);
 	}
 	
 	/**
@@ -60,7 +61,7 @@ public abstract class Device
 	 */
 	public Collection<DeviceInput> getInputs()
 	{
-		return Collections.unmodifiableCollection(inputs);
+		return Collections.unmodifiableCollection(inputs.values());
 	}
 	
 	/**
@@ -69,7 +70,27 @@ public abstract class Device
 	 */
 	public Collection<DeviceOutput> getOutputs()
 	{
-		return Collections.unmodifiableCollection(outputs);
+		return Collections.unmodifiableCollection(outputs.values());
+	}
+	
+	/**
+	 * Gets an input with a given name.
+	 * @param name The name of the input.
+	 * @return The input or {@code null} if there is no input.
+	 */
+	public DeviceInput getInput(String name)
+	{
+		return inputs.get(name);
+	}
+	
+	/**
+	 * Gets an output with a given name.
+	 * @param name The name of the output.
+	 * @return The output or {@code null} if there is no output.
+	 */
+	public DeviceOutput getOutput(String name)
+	{
+		return outputs.get(name);
 	}
 	
 }
