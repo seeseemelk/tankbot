@@ -17,7 +17,7 @@ subprojects {
 
 	repositories {
 		mavenCentral()
-		jcenter()
+		maven { url 'https://oss.sonatype.org/content/groups/public' }
 	}
 
 	dependencies {
@@ -34,6 +34,7 @@ project('tank-server') {
 
 	dependencies {
 		compile project(':tank-common')
+		compile 'com.pi4j:pi4j-core:1.2-SNAPSHOT'
 	}
 }
 
