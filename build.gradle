@@ -34,6 +34,7 @@ project('tank-server') {
 
 	dependencies {
 		compile project(':tank-common')
+		compile 'com.pi4j:pi4j-core:1.1'
 	}
 }
 
