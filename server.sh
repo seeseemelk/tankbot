@@ -1,2 +1,2 @@
 #!/bin/sh
-./gradlew -q tank-server:run
+./gradlew --console plain --no-daemon -q tank-server:run
