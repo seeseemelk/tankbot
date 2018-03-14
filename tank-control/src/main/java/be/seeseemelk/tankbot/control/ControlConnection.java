@@ -1,10 +1,7 @@
-package be.seeseemelk.tankbot.server;
+package be.seeseemelk.tankbot.control;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
-
-import org.apache.logging.log4j.Logger;
 
 import be.seeseemelk.tankbot.common.Connection;
 import be.seeseemelk.tankbot.common.MultiplexedConnection;
@@ -12,33 +9,25 @@ import be.seeseemelk.tankbot.common.packets.BasePacket;
 import be.seeseemelk.tankbot.common.packets.PingPacket;
 import be.seeseemelk.tankbot.common.packets.PongPacket;
 
-public class ServerConnection
+public class ControlConnection
 {
-	public static final int PORT = 28000;
-	private Logger logger;
-	private ServerMain server;
-	private ServerSocket serverSocket;
+	private Socket socket;
+	private ControlMain main;
 	private MultiplexedConnection connection;
 
-	public ServerConnection(ServerMain server)
+	public ControlConnection(ControlMain main)
 	{
-		logger = ServerMain.getLogger("Socket");
-		this.server = server;
+		this.main = main;
 	}
 	
 	/**
 	 * Starts the server and accepts connection.
 	 * @throws IOException 
 	 */
-	public void start() throws IOException
+	public void start(String ip, int port) throws IOException
 	{
-		logger.info("Starting socket on port " + PORT);
-		serverSocket = new ServerSocket(PORT);
-		logger.info("Waiting for connection");
-		Socket socket = serverSocket.accept();
-		logger.info("Connection established from " + socket.getRemoteSocketAddress());
+		socket = new Socket(ip, port);
 		connection = new MultiplexedConnection(socket.getInputStream(), socket.getOutputStream());
-		logger.info("Multiplexed connection established");
 	}
 	
 	/**
@@ -71,7 +60,7 @@ public class ServerConnection
 		if (packet instanceof PingPacket)
 			connection.writePacket(new PongPacket());
 		else
-			server.handlePacket(connection, packet);
+			main.handlePacket(connection, packet);
 	}
 
 }

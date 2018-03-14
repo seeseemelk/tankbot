@@ -1,4 +1,4 @@
-package be.seeseemelk.tankbot.server.devices;
+package be.seeseemelk.tankbot.common.devices;
 
 public abstract class DeviceInput extends DeviceControl
 {

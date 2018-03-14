@@ -1,4 +1,4 @@
-package be.seeseemelk.tankbot.server.devices;
+package be.seeseemelk.tankbot.common.devices;
 
 import java.util.Collection;
 import java.util.Collections;

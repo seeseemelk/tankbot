@@ -1,2 +1,2 @@
 #!/bin/sh
-./gradlew -q tank-client:run
+./gradlew --console plain tank-control:run

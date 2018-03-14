@@ -2,13 +2,16 @@ package be.seeseemelk.tankbot.server.devices;
 
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 
-public class Track extends Device
+import be.seeseemelk.tankbot.common.devices.Device;
+import be.seeseemelk.tankbot.common.devices.DeviceOutput;
+
+public class Motor extends Device
 {
 	private static int count = 0;
 	
-	public Track(GpioPinDigitalOutput pinForward, GpioPinDigitalOutput pinBackward)
+	public Motor(GpioPinDigitalOutput pinForward, GpioPinDigitalOutput pinBackward)
 	{
-		super("track_" + (count++));
+		super("motor_" + (count++));
 		addOutput(new Control(pinForward, pinBackward));
 	}
 	
@@ -38,13 +41,13 @@ class Control extends DeviceOutput
 		}
 		else if (currentValue > 0)
 		{
-			pinForward.setState(false);
-			pinBackward.setState(true);
+			pinForward.setState(true);
+			pinBackward.setState(false);
 		}
 		else
 		{
-			pinForward.setState(true);
-			pinBackward.setState(false);
+			pinForward.setState(false);
+			pinBackward.setState(true);
 		}
 	}
 

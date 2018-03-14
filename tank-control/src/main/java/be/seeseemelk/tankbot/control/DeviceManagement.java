@@ -1,10 +1,8 @@
-package be.seeseemelk.tankbot.server;
+package be.seeseemelk.tankbot.control;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.logging.log4j.Logger;
 
 import be.seeseemelk.tankbot.common.devices.Device;
 import be.seeseemelk.tankbot.common.devices.DeviceInput;
@@ -13,7 +11,6 @@ import be.seeseemelk.tankbot.common.devices.DeviceOutput;
 public class DeviceManagement
 {
 	private Map<String, Device> devices = new HashMap<>();
-	private Logger logger = ServerMain.getLogger("Devices");
 
 	public DeviceManagement()
 	{
@@ -69,14 +66,14 @@ public class DeviceManagement
 	{
 		for (Device device : getDevices())
 		{
-			logger.info(String.format("Device name: %-10sDevice type: %s", device.getName(), device.getClass().getName()));
-			logger.info("Device inputs: ");
+			System.out.format("Device name: %-10sDevice type: %s", device.getName(), device.getClass().getName());
+			System.out.println("Device inputs: ");
 			for (DeviceInput control : device.getInputs())
-				logger.info(String.format("  Input name: %-10svalue: %f", control.getName(), control.getValue()));
+				System.out.format("  Input name: %-10svalue: %f", control.getName(), control.getValue());
 
-			logger.info("Device outputs: ");
+			System.out.println("Device outputs: ");
 			for (DeviceOutput control : device.getOutputs())
-				logger.info(String.format("  Output name: %-10svalue: %f", control.getName(), control.getValue()));
+				System.out.format("  Output name: %-10svalue: %f", control.getName(), control.getValue());
 		}
 	}
 
